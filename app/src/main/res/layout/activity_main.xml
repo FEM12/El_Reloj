@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/app_background"
+        android:layout_gravity="top|center"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/image_description"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/coffe_shop"
+            android:fontFamily="@font/huova_light"
+            android:textSize="55sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shop_name"
+            android:fontFamily="@font/nefelibata_script"
+            android:textSize="35sp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="25dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:fontFamily="@font/suezone_regular"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:inputType="textEmailAddress"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_rounded"
+                android:paddingHorizontal="16dp"
+                android:fontFamily="@font/suezone_regular"
+                android:textColor="@color/coffee"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/suezone_regular"
+                android:text="@string/password"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:inputType="textPassword"
+                    android:background="@drawable/shape_rounded"
+                    android:paddingHorizontal="16dp"
+                    android:fontFamily="@font/suezone_regular"
+                    android:textColor="@color/coffee"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPasswordVisibility"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:backgroundTint="@color/white"
+                    android:background="@drawable/ripple_shape_button_icon_rounded"
+                    app:icon="@drawable/baseline_visibility_24"
+                    app:iconTint="@color/coffee"
+                    app:iconGravity="textTop"
+                    android:layout_marginStart="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/sign_in"
+            android:background="@drawable/ripple_shape_button_rounded"
+            app:backgroundTint="@color/coffee"
+            android:fontFamily="@font/suezone_regular"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="10dp"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignUp1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/sign_up"
+            android:background="@drawable/ripple_shape_button_rounded"
+            app:backgroundTint="@color/coffee"
+            android:fontFamily="@font/suezone_regular"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/lblPasswordRecovery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgotten_password"
+            android:fontFamily="@font/suezone_regular"
+            android:textColor="@color/white"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+</FrameLayout>
