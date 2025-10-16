@@ -7,6 +7,12 @@ android {
     namespace = "com.example.el_reloj"
     compileSdk = 36
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+
     defaultConfig {
         applicationId = "com.example.el_reloj"
         minSdk = 24
@@ -45,4 +51,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
 }

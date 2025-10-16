@@ -127,12 +127,12 @@
                     android:textColor="@color/coffee"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPasswordVisibility_1"
+                    android:id="@+id/btnPasswordVisibility1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:backgroundTint="@color/white"
                     android:background="@drawable/ripple_shape_button_icon_rounded"
-                    app:icon="@drawable/baseline_visibility_24"
+                    app:icon="@drawable/baseline_visibility_off_24"
                     app:iconTint="@color/coffee"
                     app:iconGravity="textTop"
                     android:layout_marginStart="10dp"/>
@@ -174,12 +174,12 @@
                     android:textColor="@color/coffee"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPasswordVisibility_2"
+                    android:id="@+id/btnPasswordVisibility2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:backgroundTint="@color/white"
                     android:background="@drawable/ripple_shape_button_icon_rounded"
-                    app:icon="@drawable/baseline_visibility_24"
+                    app:icon="@drawable/baseline_visibility_off_24"
                     app:iconTint="@color/coffee"
                     app:iconGravity="textTop"
                     android:layout_marginStart="10dp"/>
@@ -189,7 +189,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignUp2"
+            android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="@string/sign_up"
