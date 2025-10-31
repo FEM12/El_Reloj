@@ -3,19 +3,16 @@ package com.example.el_reloj
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import com.example.el_reloj.databinding.ActivityMainBinding
 import com.example.el_reloj.dto.request.UserSignInRequest
 import com.example.el_reloj.dto.response.Response
-import com.example.el_reloj.service.ApiService
+import com.example.el_reloj.service.RetrofitClient
+import com.example.el_reloj.utils.Utils
 import com.google.gson.Gson
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,29 +26,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        init(this)
         initEvents(this)
 
     }
 
+    fun init(context: Context) {
+
+        val token = Utils.getToken(context)
+
+        if (!token.isNullOrEmpty() && !Utils.isTokenExpired(token.toString())) {
+
+            val intent = Intent(context, UpdatePasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+    }
+
     fun initEvents(context: Context) {
 
-        var isActive = false
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.102:3000/api/v1/auth/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val apiService = retrofit.create(ApiService::class.java)
+        var isVisible = false
 
         binding.btnPasswordVisibility.setOnClickListener {
 
-            isActive = !isActive
-            val start = binding.txtPassword.selectionStart
-            val end = binding.txtPassword.selectionEnd
-
-            binding.txtPassword.inputType = if(isActive) InputType.TYPE_CLASS_TEXT else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            binding.txtPassword.typeface = ResourcesCompat.getFont(this, R.font.suezone_regular)
-            binding.txtPassword.setSelection(start, end)
-            binding.btnPasswordVisibility.setIconResource(if(isActive) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24)
+            isVisible = Utils.togglePasswordVisibility(
+                binding.txtPassword,
+                binding.btnPasswordVisibility,
+                isVisible,
+                context
+            )
 
         }
 
@@ -60,23 +64,30 @@ class MainActivity : AppCompatActivity() {
             val email = binding.txtEmail.text.toString().trim()
             val password = binding.txtPassword.text.toString().trim()
 
-            createRequest(apiService,email,password,context)
+            createRequest(email,password,context)
 
         }
 
         binding.btnSignUp.setOnClickListener {
 
-            val intent = Intent(this, SignUp::class.java)
+            val intent = Intent(context, SignUp::class.java)
+            startActivity(intent)
+
+        }
+
+        binding.lblPasswordRecovery.setOnClickListener {
+
+            val intent = Intent(context, PasswordRecoveryActivity::class.java)
             startActivity(intent)
 
         }
 
     }
 
-    fun createRequest(apiService: ApiService,email: String,password: String,context: Context) {
+    fun createRequest(email: String,password: String,context: Context) {
 
         val userSignInRequest = UserSignInRequest(email,password)
-        val call = apiService.signIn(userSignInRequest)
+        val call = RetrofitClient.apiService.signIn(userSignInRequest)
 
         call.enqueue(object: retrofit2.Callback<Response> {
 
@@ -104,7 +115,17 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                Toast.makeText(context,"${apiResponse?.userSignIn?.token}",Toast.LENGTH_LONG).show()
+                val name = apiResponse?.userSignIn?.fullName!!.split(" ")
+
+                Toast.makeText(context,"Welcome ${name[0]} ${name[2]}",Toast.LENGTH_LONG).show()
+
+                Utils.saveToken(context,apiResponse.userSignIn?.token.toString())
+
+                val intent = Intent(context, UpdatePasswordActivity::class.java)
+                intent.putExtra("EXTRA_NAME","${name[0]} ${name[2]}")
+                intent.putExtra("EXTRA_EMAIL",apiResponse.userSignIn?.email)
+                startActivity(intent)
+                finish()
 
             }
             override fun onFailure(call: Call<Response?>,t: Throwable) {

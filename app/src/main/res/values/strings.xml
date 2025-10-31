@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Cafeteria El Reloj</string>
-
-    <!-- Sign In -->
     <string name="image_description">Fondo de la app</string>
     <string name="coffe_shop">CAFETERIA</string>
     <string name="shop_name">El Reloj</string>
@@ -10,9 +8,11 @@
     <string name="sign_in">Iniciar sesión</string>
     <string name="sign_up">Registrarse</string>
     <string name="forgotten_password"><u>¿Haz olvidado tu contraseña?</u></string>
-
-    <!-- Sign Up -->
     <string name="full_name">Nombre completo:</string>
     <string name="confirm_password">Confirmar contraseña:</string>
-
+    <string name="new_password">Nueva contraseña:</string>
+    <string name="user">Nombre Apellido</string>
+    <string name="update_password">Actualizar Contraseña</string>
+    <string name="close_session">Cerrar Sesión</string>
+    <string name="recover_password">Recuperar Contraseña</string>
 </resources>

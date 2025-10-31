@@ -14,6 +14,8 @@ import com.example.el_reloj.dto.request.UserSignInRequest
 import com.example.el_reloj.dto.request.UserSignUpRequest
 import com.example.el_reloj.dto.response.Response
 import com.example.el_reloj.service.ApiService
+import com.example.el_reloj.service.RetrofitClient
+import com.example.el_reloj.utils.Utils
 import com.google.android.material.button.MaterialButton
 import com.google.gson.Gson
 import retrofit2.Call
@@ -40,28 +42,25 @@ class SignUp : AppCompatActivity() {
 
         var isVisible1 = false
         var isVisible2 = false
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.102:3000/api/v1/auth/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val apiService = retrofit.create(ApiService::class.java)
 
         binding.btnPasswordVisibility1.setOnClickListener {
 
-            isVisible1 = togglePasswordVisibility(
+            isVisible1 = Utils.togglePasswordVisibility(
                 binding.txtPassword,
                 binding.btnPasswordVisibility1,
-                isVisible1
+                isVisible1,
+                context
             )
 
         }
 
         binding.btnPasswordVisibility2.setOnClickListener {
 
-            isVisible2 = togglePasswordVisibility(
+            isVisible2 = Utils.togglePasswordVisibility(
                 binding.txtConfirmPassword,
                 binding.btnPasswordVisibility2,
-                isVisible2
+                isVisible2,
+                context
             )
 
         }
@@ -76,40 +75,16 @@ class SignUp : AppCompatActivity() {
             if(!password.equals(confirmPassword)) {
                 Toast.makeText(context,"You must enter the same password",Toast.LENGTH_LONG).show()
             }
-            else createRequest(apiService,full_name,email,password,context)
+            else createRequest(full_name,email,password,context)
 
         }
 
     }
 
-    private fun togglePasswordVisibility(
-        editText: EditText,
-        button: MaterialButton,
-        isVisible: Boolean
-    ): Boolean {
-
-        val newState = !isVisible
-        val start = editText.selectionStart
-        val end = editText.selectionEnd
-
-        editText.inputType = if (newState) InputType.TYPE_CLASS_TEXT
-        else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-
-        editText.typeface = ResourcesCompat.getFont(this, R.font.suezone_regular)
-        editText.setSelection(start, end)
-
-        button.setIconResource(
-            if (newState) R.drawable.baseline_visibility_24
-            else R.drawable.baseline_visibility_off_24
-        )
-
-        return newState
-    }
-
-    fun createRequest(apiService: ApiService,full_name: String,email: String,password: String,context: Context) {
+    fun createRequest(full_name: String,email: String,password: String,context: Context) {
 
         val userSignUpRequest = UserSignUpRequest(full_name,email,password)
-        val call = apiService.signUp(userSignUpRequest)
+        val call = RetrofitClient.apiService.signUp(userSignUpRequest)
 
         call.enqueue(object: retrofit2.Callback<Response> {
 

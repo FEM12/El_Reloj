@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1053745901351",
+    "project_id": "el-reloj-8f590",
+    "storage_bucket": "el-reloj-8f590.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053745901351:android:f347daa6e380d8fb378302",
+        "android_client_info": {
+          "package_name": "com.example.el_reloj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPWH6yz4r__GtI1MMpGlLL74TX8aKeKZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
